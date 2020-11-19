@@ -1,4 +1,4 @@
-# Active Storage Overview
+# Active Storage Overview [![Generic badge](https://img.shields.io/badge/EASY-YES-FF00FF.svg)](https://shields.io/)
 
 
 ## What is Active Storage?
