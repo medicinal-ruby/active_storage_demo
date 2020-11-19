@@ -1,24 +1,38 @@
-# README
+# Active Storage Overview
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## What is Active Storage?
+Active storage is an easy, built-in rails service that provides integration to your local disk and popular services like S3, Azure and Google Cloud.
 
-* Ruby version
+## Setup 
+Make sure you have Rails 5.2 (AT LEAST!) before starting. Run the command: <br>
+```
+bin/rails active_storage:install && bin/rails db:migrate
+```
+Navigate to ```config/storage.yml``` and confirm the yml file replicates this one:
 
-* System dependencies
+```yml
+#config/storage.yml
 
-* Configuration
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
 
-* Database creation
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
 
-* Database initialization
+amazon:
+  service: S3
+  access_key_id: ""
+  secret_access_key: ""
+  bucket: ""
+  region: "" # e.g. 'us-east-1'
+```
+This tutorial, we will be using the disk locally for some image uploads. Double check your development enviorment that we are writing to our local disk:
 
-* How to run the test suite
+```
+# config/environments/development.rb
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+config.active_storage.service = :local
+```
