@@ -36,3 +36,38 @@ This tutorial, we will be using the disk locally for some image uploads. Double 
 
 config.active_storage.service = :local
 ```
+
+We can now scaffold our Photo resource to create an upload form to test Active Storage!
+<br><br>
+
+```
+rails g scaffold Photo description:text 
+```
+then run the db migrations 
+```
+rails db:migrate
+```
+## Active Storage 
+
+The important thing is to add the ```has_one_attached :image``` association in the Photo model. 
+
+Then add the file_upload element to the scaffolded form:
+```
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+  ```
+  
+ 
+ Also, add the photo to show up in the show.html.erb file
+ ```
+ <%= image_tag event.image %>
+ ```
+ 
+ Finally, add image to the permitted params in the photo controller
+ ```
+     def photo_params
+      params.require(:photo).permit(:description, :image)
+    end
+   ```
